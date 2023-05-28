@@ -1,10 +1,14 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View, Button } from 'react-native';
 
-export default Home = () => {
+export default Home = ({ navigation }) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Home</Text>
+            <Button
+                title="Create a Cycle"
+                onPress={() => navigation.navigate('CreateNew')}
+            />
+
         </View>
-      );
+    )
 }
