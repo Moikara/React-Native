@@ -5,7 +5,7 @@ const reducer = (state, action) => {
     if (action.type === 'addDay') {
         return {
             ...state,
-            days: [...state.days, {title:action.value}]
+            days: [...state.days, { title: action.value }]
         }
     }
 };
@@ -30,6 +30,7 @@ export default CreateNew = ({ navigation }) => {
             value: titleInput
         });
         toggleModal();
+        setTitleInput("");
     }
 
     useEffect(() => {
@@ -43,8 +44,6 @@ export default CreateNew = ({ navigation }) => {
         });
     }, [navigation]);
 
-    console.log(state.days)
-
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Modal
@@ -54,18 +53,41 @@ export default CreateNew = ({ navigation }) => {
                 onShow={() => {
                     inputRef.current.focus();
                 }}
+                onRequestClose={() => {
+                    toggleModal();
+                }}
             >
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={{ alignItems: 'center', backgroundColor: 'white',}}>
-                        <Text>Title</Text>
-                        <TextInput
-                            ref={inputRef}
-                            onChangeText={(text) => setTitleInput(text)}
-                        />
-                        <Button
-                            title='Add'
-                            onPress={addNewDay}
-                        />
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                    <View style={{ alignItems: 'center', backgroundColor: 'white', width: 350 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center',  width: '100%', }}>
+
+
+                                <Text
+                                    style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20, marginLeft: 'auto', marginRight: 'auto'}}>
+                                    Title of the Day
+                                </Text>
+
+
+                                <Button
+                                    title='X'
+                                    onPress={toggleModal}
+                                />
+
+                        </View>
+                        <View style={{ borderColor: 'black', borderWidth: 1, width: '60%', alignItems: 'center', justifyContent: 'center', }}>
+                            <TextInput
+                                style={{textAlign: 'center'}}
+                                ref={inputRef}
+                                onChangeText={(text) => setTitleInput(text)}
+                            />
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                            <Button
+                                title='Add'
+                                disabled={titleInput.length === 0}
+                                onPress={addNewDay}
+                            />
+                        </View>
                     </View>
                 </View>
             </Modal>
