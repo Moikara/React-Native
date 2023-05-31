@@ -8,7 +8,6 @@ export default Home = ({ navigation }) => {
                 title="Create a Cycle"
                 onPress={() => navigation.navigate('CreateNew')}
             />
-
         </View>
     )
 }
