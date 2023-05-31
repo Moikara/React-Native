@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CycleContext } from '../contex/CycleContext';
 
 import Day from './Day';
+import Overlay from '../components/Overlay';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +48,7 @@ export default CreateNew = ({ navigation }) => {
 
     return (
         <CycleContext.Provider value={{ state, dispatch }}>
+            <Overlay show={showModal} toggle={toggleModal} dispatch={dispatch} />
             <Tab.Navigator>
                 {state.days.map((day) => {
                     return (
