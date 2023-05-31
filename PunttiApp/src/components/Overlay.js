@@ -5,45 +5,59 @@ export default Overlay = ({ show, toggle, dispatch }) => {
     const [input, setInput] = useState("");
     const inputRef = useRef();
 
+    const saveDay = () => {
+        dispatch({
+            type: 'addDay',
+            value: input
+        });
+        toggle();
+        setInput("");
+    }
+
     return (
         show
         &&
-            <Modal
-                style={{ alignItems: 'center', }}
-                transparent={true}
-                onShow={() => {
-                    inputRef.current.focus();
-                }}
-                onRequestClose={() => {
-                    toggle();
-                }}
-            >
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                    <View style={{ alignItems: 'center', backgroundColor: 'white', width: 350 }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', }}>
-                            <Text
-                                style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20, marginLeft: 'auto', marginRight: 'auto' }}>
-                                Title of the Day
-                            </Text>
-                            <Button
-                                title='X'
-                                onPress={toggle}
-                            />
-                        </View>
-                        <View style={{ borderColor: 'black', borderWidth: 1, width: '60%', alignItems: 'center', justifyContent: 'center', }}>
-                            <TextInput
-                                style={{ textAlign: 'center' }}
-                                ref={inputRef}
-                            />
-                        </View>
-                        <View style={{ alignItems: 'center', justifyContent: 'center', }}>
-                            <Button
-                                title='Add'
-                            />
-                        </View>
+        <Modal
+            style={{ alignItems: 'center', }}
+            transparent={true}
+            onShow={() => {
+                inputRef.current.focus();
+            }}
+            onRequestClose={() => {
+                toggle();
+            }}
+        >
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                <View style={{ alignItems: 'center', backgroundColor: 'white', width: 350 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', }}>
+                        <Text
+                            style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20, marginLeft: 'auto', marginRight: 'auto' }}>
+                            Title of the Day
+                        </Text>
+                        <Button
+                            title='X'
+                            onPress={toggle}
+                        />
+                    </View>
+                    <View style={{ borderColor: 'black', borderWidth: 1, width: '60%', alignItems: 'center', justifyContent: 'center', }}>
+                        <TextInput
+                            style={{ textAlign: 'center' }}
+                            ref={inputRef}
+                            onChangeText={(text) => {
+                                setInput(text)
+                            }}
+                        />
+                    </View>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                        <Button
+                            title='Add'
+                            disabled={input.length === 0}
+                            onPress={saveDay}
+                        />
                     </View>
                 </View>
-            </Modal>
+            </View>
+        </Modal>
     )
 }
 
