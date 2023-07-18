@@ -60,4 +60,3 @@ export default Overlay = ({ show, toggle, dispatch }) => {
         </Modal>
     )
 }
-

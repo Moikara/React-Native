@@ -7,6 +7,7 @@ import { CycleContext } from '../contex/CycleContext';
 
 import Day from './Day';
 import Overlay from '../components/Overlay';
+import Summary from './Summary'
 
 const Tab = createBottomTabNavigator();
 
@@ -21,12 +22,7 @@ const reducer = (state, action) => {
 
 export default CreateNew = ({ navigation }) => {
     const [state, dispatch] = useReducer(reducer, {
-        days: [
-            { title: 'Ma' },
-            { title: 'Ti' },
-            { title: 'To' },
-            { title: 'Pe' }
-        ]
+        days: []
     });
 
     const [showModal, setShowModal] = useState(false);
@@ -58,7 +54,13 @@ export default CreateNew = ({ navigation }) => {
                             component={Day}
                         />
                     )
-                })}
+                })
+                }
+                <Tab.Screen
+                    key={"Summary"}
+                    name={"Summary"}
+                    component={Summary}
+                />
             </Tab.Navigator>
         </CycleContext.Provider>
     )
